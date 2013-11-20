@@ -37,7 +37,7 @@ function generate_multiple_keyvalue_string(arg_name, arg_values)
 end
 
 function authentication_for_api()
-	local data_module = require("users.data.data_access_facade")
+	local data_module = require("data.data_access_facade")
 	local data_accessor = data_module:new("mysql")
 	local sign_before_enc = ""
 	local key_table = {}
