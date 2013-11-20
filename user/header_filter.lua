@@ -1,4 +1,4 @@
-local cookie_module = require "users.cookie.user_cookie_processor"
+local cookie_module = require "cookie.cookie_processor"
 local cookie = cookie_module:new()
 local method_name = ngx.req.get_method()
 ngx.log(ngx.INFO, "header filter")
