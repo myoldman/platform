@@ -4,7 +4,7 @@ local print = print
 local split = split
 local os = os
 local setmetatable = setmetatable
-
+local error_message_map = error_message_map
 
 module(...)
 
