@@ -18,6 +18,8 @@ local error_processor = error_process_module:new()
 local cookies = cookie.get_cookie()
 local username = cookies["username"] or ngx.var.username
 
+behavior_recorder.send_user_behavior_log(username)
+
 local flow_check_ret = flowcontroller.check_flowcontrol()
 if flow_check_ret == false then
 	return ngx.redirect("/access_overflow")
