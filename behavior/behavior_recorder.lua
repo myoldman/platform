@@ -27,6 +27,7 @@ function send_user_behavior_log(username)
                         host = '127.0.0.1',
                         port = 514
        	}
+        print("connect to syslog-ng")
         if not ok then
         ngx.log(ngx.ERR, "failed to initialize the logger: ", err)
         	return
