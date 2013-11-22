@@ -35,7 +35,7 @@ function send_user_behavior_log(username)
        	end
     end
     print("log to syslog-ng")
-    local ok, err = logger.log("openresty:" .. username .. "|" .. ngx.var.uri)
+    local ok, err = logger.log("openresty:" .. username .. "|" .. ngx.var.uri .. "\n")
 		if not ok then
 			ngx.log(ngx.ERR, "failed to log the message: ", err)
         return
