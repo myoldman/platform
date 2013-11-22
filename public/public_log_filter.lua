@@ -1,4 +1,4 @@
-local flowcontrol_module = require "flowcontrol.flow_controller"
+local cookie_module = require "cookie.cookie_processor"
 local behavior_module = require "behavior.behavior_recorder"
 
 local cookies = cookie.get_cookie()
