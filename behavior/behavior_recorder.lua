@@ -3,6 +3,7 @@ local type = type
 local ngx = ngx
 local require = require
 local print = print
+local string = string
 
 module(...)
 
@@ -28,14 +29,15 @@ function send_user_behavior_log(username)
                         port = 514,
                         flush_limit = 128,
        	}
-        print("connect to syslog-ng")
         if not ok then
         ngx.log(ngx.ERR, "failed to initialize the logger: ", err)
         	return
        	end
     end
-    print("log to syslog-ng")
-    local ok, err = logger.log("openresty:" .. username .. "|" .. ngx.var.uri .. "\n")
+
+    local log_format = "openresty:\"%s \"%s\" \"%s\"\n"
+    local log_msg = string.format(log_format, ngx.var.time_local, username, ngx.var.uri);
+    local ok, err = logger.log(log_msg)
 		if not ok then
 			ngx.log(ngx.ERR, "failed to log the message: ", err)
         return
