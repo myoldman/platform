@@ -25,7 +25,8 @@ function send_user_behavior_log(username)
 	 if not logger.initted() then
         local ok, err = logger.init{
                         host = '127.0.0.1',
-                        port = 514
+                        port = 514,
+                        flush_limit = 128,
        	}
         print("connect to syslog-ng")
         if not ok then
