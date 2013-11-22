@@ -2,6 +2,7 @@ local setmetatable = setmetatable
 local type = type
 local ngx = ngx
 local require = require
+local print = print
 
 module(...)
 
