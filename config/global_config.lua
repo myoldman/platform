@@ -1,5 +1,7 @@
 
 
+local require = require
+
 module("global_config")
 
 _VERSION = '0.1'
