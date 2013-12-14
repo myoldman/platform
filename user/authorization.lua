@@ -1,8 +1,7 @@
 local setmetatable = setmetatable
 local type = type
 local ngx = ngx
-local authorize_need_map = authorize_need_map
-local user_authorization_map = user_authorization_map
+local global_config = require("global_config")
 
 module(...)
 
@@ -17,13 +16,13 @@ end
 function is_authorize_needed()
 	local uri = ngx.var.uri
 	ngx.log(ngx.INFO, " check whether uri " .. uri .. " need authorization")
-	return authorize_need_map[uri] or false
+	return global_config.authorize_need_map[uri] or false
 end
 
 function authorization(username)
 	ngx.log(ngx.INFO, "authentication with user " .. username .. " uri " .. ngx.var.uri)
 
-	local user_authorizations = user_authorization_map[username]
+	local user_authorizations = global_config.user_authorization_map[username]
 	if user_authorizations == nil then
 		return false
 	end
