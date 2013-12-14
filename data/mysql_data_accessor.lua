@@ -2,15 +2,10 @@
 local setmetatable = setmetatable
 local type = type
 local ngx = ngx
-local mysql_host = mysql_host
-local mysql_port = mysql_port
-local mysql_database = mysql_database
-local mysql_user = mysql_user
-local mysql_password = mysql_password
-local max_packet_size = max_packet_size
 local require = require
 local print = print
 local error = error
+local global_config = require("global_config")
 
 module(...)
 
@@ -33,12 +28,12 @@ function mysql_connect()
 	
 	db:set_timeout(1000)
 	local ok, err, errno, sqlstate = db:connect{
-			host = MYSQL_HOST,
-			port = MYSQL_PORT,
-			database = MYSQL_DATABASE,
-			user = MYSQL_USER,
-			password = MYSQL_PASSWORAD,
-			max_packet_size = MAX_PACKET_SIZE }
+			host = global_config.mysql_host,
+			port = global_config.mysql_port,
+			database = global_config.mysql_database,
+			user = global_config.mysql_user,
+			password = global_config.mysql_password,
+			max_packet_size = global_config.max_packet_size }
 	if not ok then
 		print("failed to connect: ", err, ": ", errno, " ", sqlstate)
 		error()
