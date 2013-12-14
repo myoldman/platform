@@ -1,6 +1,7 @@
 local setmetatable = setmetatable
 local type = type
 local ngx = ngx
+local print = print
 local data_module = require("data.data_access_facade")
 local global_config = require("global_config")
 
