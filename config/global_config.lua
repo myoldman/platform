@@ -1,6 +1,7 @@
 
 
 local require = require
+local setmetatable = setmetatable
 
 module("global_config")
 
