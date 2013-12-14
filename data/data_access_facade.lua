@@ -24,7 +24,7 @@ end
 
 function getFlowControl(self)
 	local accessor = self.accessor
-	return accessor:getFlowControl(appKey)
+	return accessor:getFlowControl()
 end
 
 local class_mt = {
