@@ -71,7 +71,6 @@ function mysql_keepalive(db)
 end
 
 function mysql_exec_query(db, sql)
-	local mysql = require "resty.mysql"
 	local db = mysql_connect()
 	if not db then 
 		return nil
@@ -94,8 +93,21 @@ function getAppByAppKey(self, appKey)
 end
 
 function getFlowControl(self)
+		local db = mysql_connect()
+	if not db then 
+		return nil
+	end
+
 	local sql = "select uri, max_ps from flow_control limit 1"
-	return mysql_exec_query(sql)
+	local res, ret = pcall(mysql_query, db, sql)
+	if res == false then
+		db = mysql_reconnect(db)
+		res, ret = pcall(mysql_query, db, sql)
+	end
+
+	mysql_keepalive(db)
+
+	return ret
 end
 
 
