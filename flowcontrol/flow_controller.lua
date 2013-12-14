@@ -30,7 +30,10 @@ function init_flowcontrol()
     local data_module = require("data.data_access_facade")
     local data_accessor = data_module:new("mysql")
     local flow_control_array = data_accessor:getFlowControl()
-    print(flow_control_array)
+    for key, val in pairs(flow_control_array) do
+        print(key)
+    end
+    
   end
 end
 
