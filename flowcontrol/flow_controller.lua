@@ -3,6 +3,7 @@ local type = type
 local ngx = ngx
 local print = print
 local global_config = require("global_config")
+local require = require
 
 module(...)
 
