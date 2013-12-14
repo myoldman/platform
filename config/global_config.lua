@@ -71,11 +71,11 @@ error_message_map = {
 	}
 }
 
-mysql_host = "61.154.164.33"
-mysql_port = 8020
-mysql_database = "siddb"
-mysql_user =  "sid"
-mysql_password = "sid"
+mysql_host = "202.109.211.109"
+mysql_port = 3306
+mysql_database = "test"
+mysql_user =  "test"
+mysql_password = "ffcsbapd"
 max_packet_size = 1024 * 1024
 
 
