@@ -1,7 +1,7 @@
 local setmetatable = setmetatable
 local type = type
 local ngx = ngx
-local flow_control_map = flow_control_map
+local global_config = require("global_config")
 
 module(...)
 
