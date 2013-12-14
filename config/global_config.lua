@@ -12,6 +12,7 @@ local mt = { __index = _M }
 require "config.error_message_map"
 
 flow_control_map = {
+	["init"] = false,
 	["/foo"] =  10,
 	["/bar"] =  20
 }

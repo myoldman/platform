@@ -22,6 +22,11 @@ function getAppByAppKey(self, appKey)
 	return accessor:getAppByAppKey(appKey)
 end
 
+function getFlowControl(self)
+	local accessor = self.accessor
+	return accessor:getFlowControl(appKey)
+end
+
 local class_mt = {
     -- to prevent use of casual module global variables
     __newindex = function (table, key, val)

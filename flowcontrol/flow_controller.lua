@@ -23,6 +23,14 @@ local function incr(dict, key, increment)
  	return newval
 end
 
+function init_flowcontrol()
+  if global_config.flow_control_map == false
+    local data_module = require("data.data_access_facade")
+    local data_accessor = data_module:new("mysql")
+    local flow_control_array = data_accessor:getFlowControl()
+  end
+end
+
 function check_flowcontrol()
 	local uri = ngx.var.uri
    	local current_qps = ngx.shared.flow_control.get(ngx.shared.flow_control, uri)

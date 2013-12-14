@@ -74,24 +74,34 @@ function mysql_keepalive(db)
 	end
 end
 
-function getAppByAppKey(self, appKey)
+function mysql_exec_query(db, sql)
 	local mysql = require "resty.mysql"
 	local db = mysql_connect()
 	if not db then 
 		return nil
 	end
 
-	local sql = "select app_key,app_secret from ts_accessor where app_key = " .. ngx.quote_sql_str(appKey) .. " limit 1"
-	local res, app_info = pcall(mysql_query, db, sql)
+	local res, ret = pcall(mysql_query, db, sql)
 	if res == false then
 		db = mysql_reconnect(db)
-		res, app_info = pcall(mysql_query, db, sql)
+		res, ret = pcall(mysql_query, db, sql)
 	end
 
 	mysql_keepalive(db)
 
-	return app_info
+	return ret
 end
+
+function getAppByAppKey(self, appKey)
+	local sql = "select app_key,app_secret from ts_accessor where app_key = " .. ngx.quote_sql_str(appKey) .. " limit 1"
+	return mysql_exec_query(sql)
+end
+
+function getFlowControl(self)
+	local sql = "select uri,max_ps from flow_control"
+	return mysql_exec_query(sql)
+end
+
 
 local class_mt = {
     -- to prevent use of casual module global variables

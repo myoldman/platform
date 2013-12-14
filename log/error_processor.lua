@@ -4,7 +4,7 @@ local print = print
 local split = split
 local os = os
 local setmetatable = setmetatable
-local error_message_map = error_message_map
+local global_config = require("global_config")
 
 module(...)
 
@@ -48,11 +48,11 @@ end
 		local len = #err
 		ngx.status = ngx.HTTP_FORBIDDEN
 		if len  == 1 then
-			output_error_message(string.format(error_message_map[error_header][err[1]]))
+			output_error_message(string.format(global_config.error_message_map[error_header][err[1]]))
 		elseif len == 2  then
-			output_error_message(string.format(error_message_map[error_header][err[1]], err[2]))
+			output_error_message(string.format(global_config.error_message_map[error_header][err[1]], err[2]))
 		elseif len == 3 then
-			output_error_message(string.format(error_message_map[error_header][err[1]], err[2], err[3]))
+			output_error_message(string.format(global_config.error_message_map[error_header][err[1]], err[2], err[3]))
 		else
 			print(err)
 			output_error_message("Internal Server Error")
