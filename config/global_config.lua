@@ -1,6 +1,6 @@
 
 
-module(...)
+module("global_config")
 
 _VERSION = '0.1'
 
