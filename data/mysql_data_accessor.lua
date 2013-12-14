@@ -98,7 +98,7 @@ function getFlowControl(self)
 		return nil
 	end
 
-	local sql = "select uri, max_ps from flow_control limit 1"
+	local sql = "select uri, max_qps from flow_control limit 1"
 	local res, ret = pcall(mysql_query, db, sql)
 	if res == false then
 		db = mysql_reconnect(db)
