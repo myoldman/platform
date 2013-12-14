@@ -94,7 +94,7 @@ function getAppByAppKey(self, appKey)
 end
 
 function getFlowControl(self)
-	local sql = "select uri,max_ps from flow_control"
+	local sql = "select uri, max_ps from flow_control limit 1"
 	return mysql_exec_query(sql)
 end
 
