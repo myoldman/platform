@@ -27,14 +27,14 @@ local function incr(dict, key, increment)
 end
 
 function init_flowcontrol()
+  print(global_config.flow_control_map["/foo1"])
   if global_config.flow_control_map.init == false then
     local data_module = require("data.data_access_facade")
     local data_accessor = data_module:new("mysql")
     local flow_control_array = data_accessor:getFlowControl()
     for key, val in pairs(flow_control_array) do
-        print(val.uri)
+        global_config.flow_control_map[val.uri] = val.max_qps
     end
-    
   end
 end
 
