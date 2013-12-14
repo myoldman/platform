@@ -33,6 +33,7 @@ function init_flowcontrol()
 end
 
 function check_flowcontrol()
+  init_flowcontrol()
 	local uri = ngx.var.uri
    	local current_qps = ngx.shared.flow_control.get(ngx.shared.flow_control, uri)
    	local max_qps = global_config.flow_control_map[uri] or 0
