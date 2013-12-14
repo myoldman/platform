@@ -32,7 +32,7 @@ function init_flowcontrol()
     local data_accessor = data_module:new("mysql")
     local flow_control_array = data_accessor:getFlowControl()
     for key, val in pairs(flow_control_array) do
-        print(key)
+        print(val.uri)
     end
     
   end
