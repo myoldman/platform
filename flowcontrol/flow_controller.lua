@@ -26,7 +26,7 @@ end
 function check_flowcontrol()
 	local uri = ngx.var.uri
    	local current_qps = ngx.shared.flow_control.get(ngx.shared.flow_control, uri)
-   	local max_qps = flow_control_map[uri] or 0
+   	local max_qps = global_config.flow_control_map[uri] or 0
    	if qps and qps > max_qps then
     	return false
     end
