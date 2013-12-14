@@ -35,6 +35,7 @@ function send_user_behavior_log(username)
        	end
     end
 
+    print(ngx.var.status)
     local log_format = "openresty:\"%s\" \"%s\" \"%s\"\n"
     local log_msg = string.format(log_format, ngx.localtime(), username, ngx.var.uri);
     local ok, err = logger.log(log_msg)
