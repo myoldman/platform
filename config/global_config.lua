@@ -9,8 +9,6 @@ _VERSION = '0.1'
 
 local mt = { __index = _M }
 
-require "config.error_message_map"
-
 flow_control_map = {
 	["init"] = false,
 	["/foo"] =  10,
