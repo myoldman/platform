@@ -27,6 +27,27 @@ function getFlowControl(self)
 	return accessor:getFlowControl()
 end
 
+function addUserInfo(self, username, mobilephone, password, user_uuid)
+	local accessor = self.accessor
+	return accessor:addUserInfo(username, mobilephone, password)
+end
+
+function delUserInfoByUsername(self, username)
+	local accessor = self.accessor
+	return accessor:delUserInfoByUsername(username)
+end
+
+function delUserInfoByMobilephone(self, mobilephone)
+	local accessor = self.accessor
+	return accessor:delUserInfoByMobilephone(mobilephone)
+end
+
+function delUserInfoByUUID(self, user_uuid)
+	local accessor = self.accessor
+	return accessor:delUserInfoByUUID(user_uuid)
+end
+
+
 local class_mt = {
     -- to prevent use of casual module global variables
     __newindex = function (table, key, val)

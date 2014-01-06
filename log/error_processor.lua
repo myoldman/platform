@@ -32,7 +32,7 @@ function new(self)
 	return setmetatable({}, mt)
 end
 
-	function generel_error_process(self, err)
+function generel_error_process(self, err)
 		-- get error header acording to request uri
 		local args = ngx.req.get_uri_args()
 		local headers = ngx.req.get_headers()
