@@ -19,11 +19,11 @@ function service_process()
     local error_process_module = require "log.error_processor"
     local error_processor = error_process_module:new()
     local method = ngx.req.get_method()
-    if method ~= "POST"
+    if method ~= "POST" then
         error_processor:generel_error_process({"http_method_mismatch"})
         return
     end
-    
+
 end
 
 local class_mt = {
