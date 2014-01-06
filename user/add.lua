@@ -24,6 +24,14 @@ function service_process()
         return
     end
 
+    ngx.req.read_body()
+    local args = ngx.req.get_post_args()
+    local username = args["username"]
+    local mobilephone = args["mobilephone"]
+    local password = args["password"]
+    local resty_uuid = require "resty.uuid"
+    local uuid = resty_uuid:gen20()
+    ngx.say(uuid)
 end
 
 local class_mt = {
