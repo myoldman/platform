@@ -56,7 +56,7 @@ function mysql_query(db, query_str)
 	local res, err, errno, sqlstate =
 	db:query(query_str)
 	if not res then
-		print("bad result: ", err, ": ", errno, ": ", sqlstate, ".")
+		#print("bad result: ", err, ": ", errno, ": ", sqlstate, ".")
 		error()
 		return
 	end
