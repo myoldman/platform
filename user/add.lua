@@ -21,7 +21,6 @@ function service_process()
     local method = ngx.req.get_method()
     if method ~= "POST" then
         error_processor:generel_error_process({"http_method_mismatch"})
-        return
     end
 
     ngx.req.read_body()
@@ -34,12 +33,10 @@ function service_process()
     local timestamp = ngx.localtime()
     if mobilephone == nil then
         error_processor:generel_error_process({"mobile_phone_empty"})
-        return
     end
 
     if password == nil then
         error_processor:generel_error_process({"password_empty"})
-        return
     end
 
     local data_module = require("data.data_access_facade")
@@ -49,13 +46,11 @@ function service_process()
     local res, ret = data_accessor:addUserInfo(username, mobilephone, ngx.md5(password), uuid, timestamp)
     if res then
         local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
+        local cjson = require "cjson"
+        ngx.say(cjson.encode(result_arr))
     else
-        print(ret)
         error_processor:generel_error_process({"server_error"})
     end
-
-    local cjson = require "cjson"
-    ngx.say(cjson.encode(result_arr))
 
 end
 
