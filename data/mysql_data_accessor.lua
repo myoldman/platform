@@ -85,7 +85,7 @@ function mysql_exec_query(db, sql)
 
 	mysql_keepalive(db)
 
-	return ret, res
+	return res, ret
 end
 
 

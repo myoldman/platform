@@ -45,9 +45,11 @@ function service_process()
     local data_module = require("data.data_access_facade")
     local data_accessor = data_module:new("mysql")
 
-    local ret, res = data_accessor:addUserInfo(username, mobilephone, password, uuid, timestamp)
 
+    local res, ret = data_accessor:addUserInfo(username, mobilephone, password, uuid, timestamp)
+    print(res)
     local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
+
     local cjson = require "cjson"
     ngx.say(cjson.encode(result_arr))
 
