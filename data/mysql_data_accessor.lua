@@ -24,7 +24,7 @@ function mysql_connect()
 	local db, err = mysql:new()
 	if not db then
 		print("failed to instantiate mysql: ", err)
-		error()
+		error(err)
 		return
 	end
 	
@@ -38,7 +38,7 @@ function mysql_connect()
 			max_packet_size = global_config.max_packet_size }
 	if not ok then
 		print("failed to connect: ", err, ": ", errno, " ", sqlstate)
-		error()
+		error(err)
 		return
 	end
 	return db
@@ -57,7 +57,7 @@ function mysql_query(db, query_str)
 	db:query(query_str)
 	if not res then
 		print("bad result: ", err, ": ", errno, ": ", sqlstate, ".")
-		error()
+		error(err)
 		return
 	end
 	return res
