@@ -14,7 +14,7 @@ function new(self, accessor_name)
 	local module_str =  "data." .. accessor_name .. "_data_accessor"
 	local accessor_module = require(module_str)
 	local accessor = accessor_module:new()
-    return setmetatstable({ accessor = accessor }, mt)
+    return setmetatable({ accessor = accessor }, mt)
 end
 
 function getAppByAppKey(self, appKey)

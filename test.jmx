@@ -77,7 +77,7 @@
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="&quot;res_code&quot;:0" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="332999626">&quot;res_code&quot;:0</stringProp>
+              <stringProp name="-824124103">&quot;ret&quot;:0</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">true</boolProp>
