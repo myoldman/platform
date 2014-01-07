@@ -110,12 +110,12 @@ function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp
 end
 
 function delUserInfoByUsername(self, username)
-	local sql = string.format("delete form user_info where username = %s", ngx.quote_sql_str(username))
+	local sql = string.format("delete form user_info where user_name = %s", ngx.quote_sql_str(username))
 	return mysql_exec_query(sql)
 end
 
 function delUserInfoByMobilephone(self, mobilephone)
-	local sql = string.format("delete form user_info where mobilephone = %s", ngx.quote_sql_str(mobilephone))
+	local sql = string.format("delete form user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
 	return mysql_exec_query(sql)
 end
 
