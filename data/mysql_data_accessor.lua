@@ -71,7 +71,7 @@ function mysql_keepalive(db)
 	end
 end
 
-function mysql_exec_query(db, sql)
+function mysql_exec_query(sql)
 	local db = mysql_connect()
 	if not db then 
 		return nil
