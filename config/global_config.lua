@@ -74,7 +74,7 @@ error_message_map = {
 		http_method_mismatch = "{\"ret\" : 103,\"msg\" : \""..error_http_method_mismatch.."\"}",
 		mobile_phone_empty = "{\"ret\" : 101,\"msg\" : \""..error_mobilephone_empty.."\"}",
 		password_empty = "{\"ret\" : 102,\"msg\" : \""..error_password_empty.."\"}",
-		error_duplicate_mobile_or_user = "{\"ret\" : 100,\"msg\" : \""..error_duplicate_mobile_or_user.."\"}"
+		error_duplicate_mobile_or_user = "{\"ret\" : 100,\"msg\" : \""..error_duplicate_mobile_or_user.."\"}",
 		server_error = "{\"ret\" : 500,\"msg\" : \""..error_server_error.."\"}"
 	}
 }
