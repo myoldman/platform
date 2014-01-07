@@ -31,7 +31,26 @@ function service_process()
     local password = args["password"]
     local resty_uuid = require "resty.uuid"
     local uuid = resty_uuid:gen20()
-    ngx.say(uuid)
+    local timestamp = ngx.localtime()
+    if mobilephone == nil then
+        error_processor:generel_error_process({"mobile_phone_empty"})
+        return
+    end
+
+    if password == nil then
+        error_processor:generel_error_process({"password_empty"})
+        return
+    end
+
+    local data_module = require("data.data_access_facade")
+    local data_accessor = data_module:new("mysql")
+
+    local ret, res = data_accessor:addUserInfo(username, mobilephone, password, uuid, timestamp)
+
+    local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
+    local cjson = require "cjson"
+    ngx.say(cjson.encode(result_arr))
+
 end
 
 local class_mt = {

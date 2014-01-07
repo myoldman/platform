@@ -84,8 +84,9 @@ function mysql_exec_query(db, sql)
 
 	mysql_keepalive(db)
 
-	return ret
+	return ret, res
 end
+
 
 function getAppByAppKey(self, appKey)
 	local sql = "select app_key,app_secret from ts_accessor where app_key = " .. ngx.quote_sql_str(appKey) .. " limit 1"
@@ -93,23 +94,30 @@ function getAppByAppKey(self, appKey)
 end
 
 function getFlowControl(self)
-		local db = mysql_connect()
-	if not db then 
-		return nil
-	end
-
 	local sql = "select uri, max_qps from flow_control"
-	local res, ret = pcall(mysql_query, db, sql)
-	if res == false then
-		db = mysql_reconnect(db)
-		res, ret = pcall(mysql_query, db, sql)
-	end
-
-	mysql_keepalive(db)
-
-	return ret
+	return mysql_exec_query(sql)
 end
 
+function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp)
+	local sql = string.format("insert into user_info(username, mobilephone, password, user_uuid, timestamp) values (%s, %s, %s, %s %s)", ngx.quote_sql_str(username), ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
+	return mysql_exec_query(sql)
+end
+
+function delUserInfoByUsername(self, username)
+	local sql = string.format("delete form user_info where username = %s", ngx.quote_sql_str(username))
+	return mysql_exec_query(sql)
+end
+
+function delUserInfoByMobilephone(self, mobilephone)
+	local sql = string.format("delete form user_info where mobilephone = %s", ngx.quote_sql_str(mobilephone))
+	return mysql_exec_query(sql)
+end
+
+function delUserInfoByUUID(self, user_uuid)
+	local sql = string.format("delete form user_info where user_uuid = %s", ngx.quote_sql_str(user_uuid))
+	return mysql_exec_query(sql)
+end
+ 
 
 local class_mt = {
     -- to prevent use of casual module global variables

@@ -14,7 +14,7 @@ function new(self, accessor_name)
 	local module_str =  "data." .. accessor_name .. "_data_accessor"
 	local accessor_module = require(module_str)
 	local accessor = accessor_module:new()
-    return setmetatable({ accessor = accessor }, mt)
+    return setmetatstable({ accessor = accessor }, mt)
 end
 
 function getAppByAppKey(self, appKey)
@@ -27,9 +27,9 @@ function getFlowControl(self)
 	return accessor:getFlowControl()
 end
 
-function addUserInfo(self, username, mobilephone, password, user_uuid)
+function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp)
 	local accessor = self.accessor
-	return accessor:addUserInfo(username, mobilephone, password)
+	return accessor:addUserInfo(username, mobilephone, password, timestamp)
 end
 
 function delUserInfoByUsername(self, username)
