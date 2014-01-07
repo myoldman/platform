@@ -76,7 +76,7 @@ function mysql_exec_query(db, sql)
 	if not db then 
 		return nil
 	end
-
+	print(sql)
 	local res, ret = pcall(mysql_query, db, sql)
 	if res == false then
 		db = mysql_reconnect(db)
