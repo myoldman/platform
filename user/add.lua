@@ -46,7 +46,7 @@ function service_process()
     local data_accessor = data_module:new("mysql")
 
 
-    local res, ret = data_accessor:addUserInfo(username, mobilephone, password, uuid, timestamp)
+    local res, ret = data_accessor:addUserInfo(username, mobilephone, ngx.md5(password), uuid, timestamp)
     if res then
         local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
     else

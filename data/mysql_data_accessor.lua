@@ -102,9 +102,9 @@ end
 function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp)
 	local sql
 	if username ~= nil then
-		 sql = string.format("insert into user_info(username, mobilephone, password, user_uuid, timestamp) values (%s, %s, %s, %s %s)", ngx.quote_sql_str(username), ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
+		 sql = string.format("insert into user_info(user_name, mobile_phone, password, user_uuid, create_time) values (%s, %s, %s, %s %s)", ngx.quote_sql_str(username), ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
 	else
-		sql = string.format("insert into user_info(mobilephone, password, user_uuid, timestamp) values (%s, %s, %s %s)", ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
+		sql = string.format("insert into user_info(mobile_phone, password, user_uuid, create_time) values (%s, %s, %s %s)", ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
 	end
 	return mysql_exec_query(sql)
 end
