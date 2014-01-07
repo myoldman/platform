@@ -47,9 +47,12 @@ function service_process()
 
 
     local res, ret = data_accessor:addUserInfo(username, mobilephone, password, uuid, timestamp)
-    print(res)
-    local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
-
+    if res then
+        local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
+    else
+        error_processor:generel_error_process({"server_error"})
+    end
+    
     local cjson = require "cjson"
     ngx.say(cjson.encode(result_arr))
 

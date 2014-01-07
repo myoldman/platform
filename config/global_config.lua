@@ -47,6 +47,7 @@ error_access_token_expired = "request app [%s] ACCESS_TOKEN [%s] expired"
 error_http_method_mismatch = "http request method mismatch"
 error_mobilephone_empty = "mobil phone number empty"
 error_password_empty = "mobil phone number empty"
+error_server_error = "server internal error"
 
 error_message_map = {
 	["general"] = {
@@ -71,7 +72,8 @@ error_message_map = {
 		access_token_expired = "{\"ret\" : 110,\"msg\" : \""..error_access_token_expired.."\"}",
 		http_method_mismatch = "{\"ret\" : 105,\"msg\" : \""..error_http_method_mismatch.."\"}",
 		mobile_phone_empty = "{\"ret\" : 105,\"msg\" : \""..error_mobilephone_empty.."\"}",
-		password_empty = "{\"ret\" : 105,\"msg\" : \""..error_password_empty.."\"}"
+		password_empty = "{\"ret\" : 105,\"msg\" : \""..error_password_empty.."\"}",
+		server_error = "{\"ret\" : 105,\"msg\" : \""..error_server_error.."\"}"
 	}
 }
 
