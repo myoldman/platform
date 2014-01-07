@@ -49,9 +49,8 @@ function service_process()
         local cjson = require "cjson"
         ngx.say(cjson.encode(result_arr))
     else
-        print(ret)
         if string.find (ret, "Duplicate entry") then
-            error_processor:generel_error_process({"server_error"})
+            error_processor:generel_error_process({"error_duplicate_mobile_or_user"})
         else
             error_processor:generel_error_process({"server_error"})
         end
