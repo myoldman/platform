@@ -76,7 +76,7 @@ function mysql_exec_query(db, sql)
 	if not db then 
 		return nil
 	end
-	print(sql)
+
 	local res, ret = pcall(mysql_query, db, sql)
 	if res == false then
 		db = mysql_reconnect(db)
@@ -100,10 +100,11 @@ function getFlowControl(self)
 end
 
 function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp)
+	local sql
 	if username ~= nil then
-		local sql = string.format("insert into user_info(username, mobilephone, password, user_uuid, timestamp) values (%s, %s, %s, %s %s)", ngx.quote_sql_str(username), ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
+		 sql = string.format("insert into user_info(username, mobilephone, password, user_uuid, timestamp) values (%s, %s, %s, %s %s)", ngx.quote_sql_str(username), ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
 	else
-		local sql = string.format("insert into user_info(mobilephone, password, user_uuid, timestamp) values (%s, %s, %s %s)", ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
+		sql = string.format("insert into user_info(mobilephone, password, user_uuid, timestamp) values (%s, %s, %s %s)", ngx.quote_sql_str(mobilephone), ngx.quote_sql_str(password), ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(timestamp))
 	end
 	return mysql_exec_query(sql)
 end
