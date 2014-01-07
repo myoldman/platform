@@ -7,6 +7,7 @@ local print = print
 local error = error
 local global_config = require("global_config")
 local pcall = pcall
+local string = string
 
 module(...)
 
