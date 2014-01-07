@@ -29,7 +29,7 @@ end
 
 function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp)
 	local accessor = self.accessor
-	return accessor:addUserInfo(username, mobilephone, password, timestamp)
+	return accessor:addUserInfo(username, mobilephone, password, user_uuid, timestamp)
 end
 
 function delUserInfoByUsername(self, username)
