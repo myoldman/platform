@@ -65,7 +65,7 @@ function authentication_for_findme()
 		error({"access_token_expired"})
 	end
 
-	ngx.req.set_header("user-uuid", ret["user-uuid"])
+	ngx.req.set_header("user-uuid", ret[1]["user-uuid"])
 
 end
 
