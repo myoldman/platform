@@ -112,6 +112,9 @@ end
 
 function delUserInfoByUsername(self, username)
 	local res, user_info = getUserInfoByUserName(self, username)
+	if not res then
+		return res, user_info
+	end
 	deleteUserToken(self, user_info[1]["user_uuid"])
 	local sql = string.format("delete from user_info where user_name = %s", ngx.quote_sql_str(username))
 	return mysql_exec_query(sql)
@@ -119,6 +122,9 @@ end
 
 function delUserInfoByMobilephone(self, mobilephone)
 	local res, user_info = getUserInfoByMobilePhone(self, mobilephone)
+	if not res then
+		return res, user_info
+	end
 	deleteUserToken(self, user_info[1]["user_uuid"])
 	local sql = string.format("delete from user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
 	return mysql_exec_query(sql)
