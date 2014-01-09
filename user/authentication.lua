@@ -38,6 +38,7 @@ function authentication_for_findme()
 		error({"sign_empty"})
 	end
 
+	print(request_time)
 	local pattern = "(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)"
 	local runyear, runmonth, runday, runhour, runminute, runseconds = request_time:match(pattern)
 	if runyear == nil or runmonth == nil or runday == nil or runhour == nil or runminute == nil or runseconds == nil then
