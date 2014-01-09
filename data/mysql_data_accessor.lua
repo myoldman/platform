@@ -125,12 +125,12 @@ function delUserInfoByUUID(self, user_uuid)
 end
  
  function getUserInfoByUserName(self, username)
-	local sql = string.format("select id,user_uuid from user_info where user_name = %s limit 1", ngx.quote_sql_str(username))
+	local sql = string.format("select id,user_uuid,password from user_info where user_name = %s limit 1", ngx.quote_sql_str(username))
 	return mysql_exec_query(sql)
 end
 
 function getUserInfoByMobilePhone(self, mobilephone)
-	local sql = string.format("select id,user_uuid from user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
+	local sql = string.format("select id,user_uuid,password from user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
 	return mysql_exec_query(sql)
 end
 
