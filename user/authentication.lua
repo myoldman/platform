@@ -7,6 +7,7 @@ local table = table
 local print = print
 local pairs = pairs
 local ipairs = ipairs
+local os = os
 local global_config = require("global_config")
 
 module(...)
