@@ -8,6 +8,7 @@ local error = error
 local global_config = require("global_config")
 local pcall = pcall
 local string = string
+local os = os
 
 module(...)
 
@@ -139,8 +140,10 @@ function addUserToken(self, user_uuid, token)
 	mysql_exec_query(sql)
 	local create_time = ngx.localtime()
 	local create_time_sec = ngx.time()
-	print(create_time_sec)
-	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time, create_time)
+	local expire_time_sec = create_time_sec +  60 * 60 * 24 * 90
+	local expire_time = os.date("%Y-%m-%d %X",expire_time_sec)
+	print(expire_time)
+	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time, expire_time)
 	return mysql_exec_query(sql)
 end
  
