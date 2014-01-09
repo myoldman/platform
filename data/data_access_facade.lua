@@ -47,6 +47,22 @@ function delUserInfoByUUID(self, user_uuid)
 	return accessor:delUserInfoByUUID(user_uuid)
 end
 
+function getUserInfoByMobilePhone(self, mobilephone)
+	local accessor = self.accessor
+	return accessor:getUserInfoByMobilePhone(mobilephone)
+end
+
+function getUserInfoByUserName(self, username)
+	local accessor = self.accessor
+	return accessor:getUserInfoByUserName(username)
+end
+
+function addUserToken(self, user_uuid, token)
+	local accessor = self.accessor
+	return accessor:addUserToken(user_uuid, token)
+end
+
+
 
 local class_mt = {
     -- to prevent use of casual module global variables

@@ -124,6 +124,27 @@ function delUserInfoByUUID(self, user_uuid)
 	return mysql_exec_query(sql)
 end
  
+ function getUserInfoByUserName(self, username)
+	local sql = string.format("select id,user_uuid from user_info where user_name = %s limit 1", ngx.quote_sql_str(username))
+	return mysql_exec_query(sql)
+end
+
+function getUserInfoByMobilePhone(self, mobilephone)
+	local sql = string.format("select id,user_uuid from user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
+	return mysql_exec_query(sql)
+end
+
+function addUserToken(self, user_uuid, token)
+	local sql = string.format("delete from token where user_uuid = %s", ngx.quote_sql_str(user_uuid))
+	mysql_exec_query(sql)
+	local create_time = ngx.localtime()
+	local create_time_sec = ngx.time()
+	print(create_time_sec)
+	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time)
+	return
+end
+ 
+
 
 local class_mt = {
     -- to prevent use of casual module global variables

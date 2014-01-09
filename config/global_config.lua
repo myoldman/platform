@@ -48,6 +48,10 @@ error_http_method_mismatch = "http request method mismatch"
 error_mobilephone_empty = "mobil phone number empty"
 error_password_empty = "password empty"
 error_duplicate_mobile_or_user = "duplicate mobile phone or username"
+error_mobilephone_or_username_needed = "please provide mobile phone or username at least"
+error_mobilephone_not_found = "mobilephone not found"
+error_username_not_found = "username not found"
+error_password_not_match = "password not match"
 error_server_error = "server internal error"
 
 error_message_map = {
@@ -75,6 +79,10 @@ error_message_map = {
 		mobile_phone_empty = "{\"ret\" : 101,\"msg\" : \""..error_mobilephone_empty.."\"}",
 		password_empty = "{\"ret\" : 102,\"msg\" : \""..error_password_empty.."\"}",
 		error_duplicate_mobile_or_user = "{\"ret\" : 100,\"msg\" : \""..error_duplicate_mobile_or_user.."\"}",
+		mobilephone_or_username_needed = "{\"ret\" : 104,\"msg\" : \""..error_mobilephone_or_username_needed.."\"}",
+		mobilephone_not_found = "{\"ret\" : 105,\"msg\" : \""..error_mobilephone_not_found.."\"}",
+		username_not_found = "{\"ret\" : 106,\"msg\" : \""..error_username_not_found.."\"}",
+		password_not_match = "{\"ret\" : 107,\"msg\" : \""..error_password_not_match.."\"}",
 		server_error = "{\"ret\" : 500,\"msg\" : \""..error_server_error.."\"}"
 	}
 }
