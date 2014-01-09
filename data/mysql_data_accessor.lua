@@ -112,7 +112,7 @@ end
 
 function delUserInfoByUsername(self, username)
 	local res, user_info = getUserInfoByUserName(self, username)
-	if not res then
+	if not res or not user_info then
 		return res, user_info
 	end
 	deleteUserToken(self, user_info[1]["user_uuid"])
@@ -122,7 +122,7 @@ end
 
 function delUserInfoByMobilephone(self, mobilephone)
 	local res, user_info = getUserInfoByMobilePhone(self, mobilephone)
-	if not res then
+	if not res or not user_info then
 		return res, user_info
 	end
 	deleteUserToken(self, user_info[1]["user_uuid"])
