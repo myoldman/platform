@@ -141,7 +141,7 @@ function addUserToken(self, user_uuid, token)
 	local create_time_sec = ngx.time()
 	print(create_time_sec)
 	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time, create_time)
-	return
+	return mysql_exec_query(sql)
 end
  
 
