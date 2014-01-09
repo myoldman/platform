@@ -135,12 +135,12 @@ function getUserInfoByMobilePhone(self, mobilephone)
 end
 
 function addUserToken(self, user_uuid, token)
-	local sql = string.format("delete from token where user_uuid = %s", ngx.quote_sql_str(user_uuid))
+	local sql = string.format("delete from user_token where user_uuid = %s", ngx.quote_sql_str(user_uuid))
 	mysql_exec_query(sql)
 	local create_time = ngx.localtime()
 	local create_time_sec = ngx.time()
 	print(create_time_sec)
-	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time)
+	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time, create_time)
 	return
 end
  
