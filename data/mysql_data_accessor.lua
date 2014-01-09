@@ -111,16 +111,21 @@ function addUserInfo(self, username, mobilephone, password, user_uuid, timestamp
 end
 
 function delUserInfoByUsername(self, username)
+	local user_info = getUserInfoByUserName(self, username)
+	deleteUserToken(self, user_info[1]["user_uuid"])
 	local sql = string.format("delete from user_info where user_name = %s", ngx.quote_sql_str(username))
 	return mysql_exec_query(sql)
 end
 
 function delUserInfoByMobilephone(self, mobilephone)
+	local user_info = getUserInfoByMobilePhone(self, mobilephone)
+	deleteUserToken(self, user_info[1]["user_uuid"])
 	local sql = string.format("delete from user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
 	return mysql_exec_query(sql)
 end
 
 function delUserInfoByUUID(self, user_uuid)
+	deleteUserToken(self, user_uuid)
 	local sql = string.format("delete from user_info where user_uuid = %s", ngx.quote_sql_str(user_uuid))
 	return mysql_exec_query(sql)
 end
@@ -135,9 +140,13 @@ function getUserInfoByMobilePhone(self, mobilephone)
 	return mysql_exec_query(sql)
 end
 
-function addUserToken(self, user_uuid, token)
+function deleteUserToken(self, user_uuid)
 	local sql = string.format("delete from user_token where user_uuid = %s", ngx.quote_sql_str(user_uuid))
-	mysql_exec_query(sql)
+	return mysql_exec_query(sql)
+end
+
+function addUserToken(self, user_uuid, token)
+	deleteUserToken(self, user_uuid)
 	local create_time = ngx.localtime()
 	local create_time_sec = ngx.time()
 	local expire_time_sec = create_time_sec +  60 * 60 * 24 * 90
