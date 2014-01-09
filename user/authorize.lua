@@ -57,6 +57,7 @@ function service_process()
         user_info = ret
     end
 
+    print(user_info[1]["password"])
     if ngx.md5(password) ~= user_info[1]["password"] then
             error_processor:generel_error_process({"password_not_match"})
     end
