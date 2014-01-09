@@ -42,7 +42,7 @@ function service_process()
     local data_module = require("data.data_access_facade")
     local data_accessor = data_module:new("mysql")
 
-
+    print(ngx.md5(password))
     local res, ret = data_accessor:addUserInfo(username, mobilephone, ngx.md5(password), uuid, timestamp)
     if res then
         local result_arr = {ret = 0, msg = "success", create_time = timestamp, user_uuid = user_uuid }
