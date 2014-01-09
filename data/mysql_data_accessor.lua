@@ -142,8 +142,7 @@ function addUserToken(self, user_uuid, token)
 	local create_time_sec = ngx.time()
 	local expire_time_sec = create_time_sec +  60 * 60 * 24 * 90
 	local expire_time = os.date("%Y-%m-%d %X",expire_time_sec)
-	print(expire_time)
-	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), create_time, expire_time)
+	sql = string.format("insert into user_token(user_uuid, token, create_time, expire_time) values (%s, %s, %s, %s)", ngx.quote_sql_str(user_uuid), ngx.quote_sql_str(token), ngx.quote_sql_str(create_time), ngx.quote_sql_str(expire_time))
 	return mysql_exec_query(sql)
 end
  
