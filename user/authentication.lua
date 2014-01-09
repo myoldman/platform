@@ -38,7 +38,6 @@ function authentication_for_findme()
 		error({"sign_empty"})
 	end
 
-	print(request_time)
 	local pattern = "(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)"
 	local runyear, runmonth, runday, runhour, runminute, runseconds = request_time:match(pattern)
 	if runyear == nil or runmonth == nil or runday == nil or runhour == nil or runminute == nil or runseconds == nil then
@@ -58,7 +57,7 @@ function authentication_for_findme()
 		error({"access_token_invalid"})
 	end
 
-	local runyear, runmonth, runday, runhour, runminute, runseconds = request_time:match(ret["expire_time"])
+	local runyear, runmonth, runday, runhour, runminute, runseconds = ret[1]["expire_time"]:match(pattern)
 	local expire_time_second = os.time({year = runyear, month = runmonth, day = runday, hour = runhour, min = runminute, sec = runseconds})
 
 	if expire_time_second < ngx.time() then
