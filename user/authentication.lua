@@ -7,6 +7,7 @@ local table = table
 local print = print
 local pairs = pairs
 local ipairs = ipairs
+local global_config = require("global_config")
 
 module(...)
 
@@ -16,6 +17,55 @@ local mt = { __index = _M }
 
 function new(self)
     return setmetatable({}, mt)
+end
+function authentication_for_findme()
+	local data_module = require("data.data_access_facade")
+	local data_accessor = data_module:new("mysql")
+	local headers = ngx.req.get_headers()
+	local request_time = headers["request-time"]
+	local access_token = headers["access-token"]
+	local sign = headers["sign"]
+
+	if request_time == nil or type(request_time) ~= "string" or #request_time <= 0 then
+		error({"request_time_empty"})
+	end
+
+	if access_token == nil or type(access_token) ~= "string" or #access_token <= 0 then
+		error({"access_token_empty"})
+	end
+	
+	if sign == nil or type(sign) ~= "string" or #sign <= 0 then
+		error({"sign_empty"})
+	end
+
+	local pattern = "(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)"
+	local runyear, runmonth, runday, runhour, runminute, runseconds = request_time:match(pattern)
+	if runyear == nil or runmonth == nil or runday == nil or runhour == nil or runminute == nil or runseconds == nil then
+		error({"request_time_format_error"})
+		return	
+	end
+
+	local res, ret = data_accessor:getTokenInfoByToken(access_token)
+
+	if not res or ret == nil or #ret <= 0 then
+		error({"access_token_invalid"})
+	end
+
+	local sign_cal = ngx.md5(request_time..access_token..global_config.secret)
+
+	if sign_cal ~= sign then
+		error({"access_token_invalid"})
+	end
+
+	local runyear, runmonth, runday, runhour, runminute, runseconds = request_time:match(ret["expire_time"])
+	local expire_time_second = os.time({year = runyear, month = runmonth, day = runday, hour = runhour, min = runminute, sec = runseconds})
+
+	if expire_time_second < ngx.time() then
+		error({"access_token_expired"})
+	end
+
+	ngx.req.set_header("user-uuid", ret["user-uuid"])
+
 end
 
 function authentication(username, password)

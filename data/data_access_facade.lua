@@ -62,6 +62,11 @@ function addUserToken(self, user_uuid, token)
 	return accessor:addUserToken(user_uuid, token)
 end
 
+function getTokenInfoByToken(self, token)
+	local accessor = self.accessor
+	return accessor:getTokenInfoByToken(token)
+end
+
 
 
 local class_mt = {

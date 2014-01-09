@@ -142,7 +142,7 @@ end
 end
 
 function getUserInfoByMobilePhone(self, mobilephone)
-	local sql = string.format("select id,user_uuid,password from user_info where mobile_phone = %s", ngx.quote_sql_str(mobilephone))
+	local sql = string.format("select id,user_uuid,password from user_info where mobile_phone = %s limit 1", ngx.quote_sql_str(mobilephone))
 	return mysql_exec_query(sql)
 end
 
@@ -161,6 +161,10 @@ function addUserToken(self, user_uuid, token)
 	return mysql_exec_query(sql)
 end
  
+function getTokenInfoByToken(self, token)
+	local sql = string.format("select user_uuid, token, create_time, expire_time from user_token where token = %s limit 1", ngx.quote_sql_str(token))
+	return mysql_exec_query(sql)
+end
 
 
 local class_mt = {

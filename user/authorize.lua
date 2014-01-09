@@ -32,7 +32,6 @@ function service_process()
     local uuid = resty_uuid:gen20()
     local token = ngx.md5(ngx.encode_base64(uuid))
 
-    print(token)
     if mobilephone == nil and username == nil then
         error_processor:generel_error_process({"mobilephone_or_username_needed"})
     end
